@@ -1,19 +1,24 @@
+import WeatherSkeleton from '@/components/loading-skeleton'
 import { Button } from '@/components/ui/button'
 import { useGeolocation } from '@/hooks/use-geolocation'
 import { RefreshCcw } from 'lucide-react'
 import React from 'react'
 
 const WeatherDashboard = () => {
-  const { coordinates, error: locationError, getLocation, isLoading } = useGeolocation();
+  const { coordinates, error: locationError, getLocation, isLoading: locationLoading } = useGeolocation();
 
   console.log(coordinates);
 
   const handelRefreash = () => {
     getLocation();
-    if(coordinates){
+    if (coordinates) {
       //  reload weather data
     }
   };
+
+  if (locationLoading) {
+    return <WeatherSkeleton />
+  }
 
   return (
     <div>
